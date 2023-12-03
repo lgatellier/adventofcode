@@ -5,12 +5,21 @@ from pathlib import Path
 import typer
 from typing import Optional
 
+from aoc import utils
+
 
 app = typer.Typer(
     name="aoc", rich_markup_mode="rich", help="Advent of Code CLI", no_args_is_help=True
 )
 
 today = date.today()
+
+
+@app.callback()
+def main(verbose: bool = False):
+    if verbose:
+        typer.echo("Enabling verbose mode")
+        utils.state["verbose"] = True
 
 
 def validate_year(year: int) -> bool:
@@ -45,12 +54,10 @@ def run(
         help="Your AoC puzzle input file.",
     ),
 ):
+    """
+    Run the Advent Of Code puzzle for the given year, day and part.
+    """
     module_name = f"aoc.y{year - 2000}.day{day:02d}.part{part}"
-
-    if not os.path.exists(input_file):
-        print("test")
-        typer.echo(f"ERROR : Input file {input_file} does not exist", err=True)
-        raise typer.Exit(code=1)
 
     try:
         module = importlib.import_module(module_name)
