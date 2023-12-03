@@ -1,11 +1,7 @@
+from aoc import utils
+
 COLORS = ["red", "green", "blue"]
-
 LINE = "Game 79: 7 red, 1 green; 1 blue, 6 red, 2 green; 1 blue, 12 red"
-
-
-def read_file(input):
-    with open(input, "r") as f:
-        return [line.strip() for line in f.readlines()]
 
 
 def init_colors_count():
@@ -49,9 +45,8 @@ def compute_game_power(game_minimum_cubes) -> int:
     return game_power
 
 
-def main():
-    input = "input"
-    lines = read_file(input)
+def main(input_file="input"):
+    lines = utils.read_file(input_file)
     games_power_sum = 0
     for line in lines:
         print(line)
@@ -62,6 +57,10 @@ def main():
 
         games_power_sum += game_power
     print(f"Games power sum: {games_power_sum}")
+    return games_power_sum
 
 
-main()
+if __name__ == "__main__":
+    import sys
+
+    main(sys.argv[1] if len(sys.argv) > 1 else None)

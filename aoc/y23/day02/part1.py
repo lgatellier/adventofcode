@@ -1,11 +1,7 @@
+from aoc import utils
+
+
 CUBES = {"red": 12, "green": 13, "blue": 14}
-
-LINE = "Game 79: 7 red, 1 green; 1 blue, 6 red, 2 green; 1 blue, 12 red"
-
-
-def read_file(input):
-    with open(input, "r") as f:
-        return [line.strip() for line in f.readlines()]
 
 
 def is_game_possible(line) -> bool:
@@ -13,10 +9,10 @@ def is_game_possible(line) -> bool:
     game_sets = [single_set.strip() for single_set in line.split(":")[1].split(";")]
     for game_set in game_sets:
         if is_set_possible(game_set):
-            print(f"Set {game_set} is possible")
+            utils.verbose(f"Set {game_set} is possible")
         else:
             return game_id, False
-    print(f"Game {game_id} is possible")
+    utils.verbose(f"Game {game_id} is possible")
     return game_id, True
 
 
@@ -30,16 +26,21 @@ def is_set_possible(set) -> bool:
     return True
 
 
-def main():
-    input = "input"
-    lines = read_file(input)
+def main(input_file="input"):
+    lines = utils.read_file(input_file)
     possible_games = []
     for line in lines:
         game_id, possible = is_game_possible(line)
         if possible:
             possible_games.append(game_id)
-    print(f"Possible games: {possible_games}")
-    print(sum(possible_games))
+
+    print(f"Possible games found : {possible_games}")
+    possible_games_sum = sum(possible_games)
+    print(f"Sum of possible games is {possible_games_sum}")
+    return possible_games_sum
 
 
-main()
+if __name__ == "__main__":
+    import sys
+
+    main(sys.argv[1] if len(sys.argv) > 1 else None)
