@@ -95,3 +95,6 @@ def test_is_part_number_shouldReturnFalse_whenAdjacentSymbolInNextLineBeforeNumb
     next_line = "...*"
     match = re.search(r"\d+", line)
     assert part1.is_part_number(line, None, next_line, match) == True
+
+def test_main():
+    assert part1.main("tests/input_day03") == 527369
