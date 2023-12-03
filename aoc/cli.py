@@ -34,7 +34,7 @@ def run(
     year: int = typer.Argument(callback=validate_year, help="The year of the puzzle"),
     day: int = typer.Argument(callback=validate_day, help="The day of the puzzle"),
     part: int = typer.Argument(1, help="The part number of the puzzle (1 or 2)"),
-    input_file: Optional[Path] = typer.Argument(
+    input_file: Path = typer.Argument(
         "./input",
         exists=True,
         file_okay=True,
@@ -55,7 +55,7 @@ def run(
     try:
         module = importlib.import_module(module_name)
         typer.echo(f"Starting AdventOfCode {year} Day {day} Part {part}")
-        module.main(input=input_file)
+        module.main(input_file=input_file)
     except ModuleNotFoundError as err:
         typer.echo(
             f"ERROR : AdventOfCode {year} Day {day} Part {part} does not exist or is not implemented yet",

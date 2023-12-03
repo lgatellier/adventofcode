@@ -33,8 +33,8 @@ def is_gear_symbol(ctx: Context, symbol_match) -> bool:
     return False, None
 
 
-def main(input="input"):
-    lines = utils.read_file(input)
+def main(input_file="input"):
+    lines = utils.read_file(input_file)
     part_numbers = filter_part_numbers(lines, find_all_numbers(lines))
     symbols = [find_all_symbol(line) for line in lines]
 
