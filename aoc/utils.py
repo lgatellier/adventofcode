@@ -8,6 +8,6 @@ def read_file(input):
         return [line.strip() for line in f.readlines()]
 
 
-def verbose(message):
+def verbose(message, **kwargs):
     if state["verbose"]:
-        print(message)
+        print(message.format(**kwargs))

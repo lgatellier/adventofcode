@@ -1,5 +1,7 @@
 import re
 
+from aoc import utils
+
 LINE_LENGTH = 140
 NUMBERS_PATTERN = r"(\d+)"
 SYMBOL_PATTERN = r"[^\d\.]"
@@ -43,6 +45,11 @@ def filter_part_numbers(lines, numbers) -> list[int]:
             previous_line = lines[i - 1] if i > 0 else None
             next_line = lines[i + 1] if i < len(lines) - 1 else None
             if is_part_number(line, previous_line, next_line, match):
+                utils.verbose(
+                    " Line {line_number} - Part number found : {num}",
+                    line_number=i,
+                    num=match.group(0),
+                )
                 part_numbers[i].append(match)
     return part_numbers
 

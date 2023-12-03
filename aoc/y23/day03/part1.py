@@ -5,8 +5,8 @@ from aoc.y23.day03 import (
 )
 
 
-def main(input="input", lines_count=None):
-    lines = read_file(input)
+def main(input_file="input", lines_count=None):
+    lines = read_file(input_file)
 
     sub_lines = lines[0 : int(lines_count)] if lines_count else lines
     numbers = find_all_numbers(sub_lines)
