@@ -45,3 +45,38 @@ def filter_part_numbers(lines, numbers) -> list[int]:
             if is_part_number(line, previous_line, next_line, match):
                 part_numbers[i].append(match)
     return part_numbers
+
+
+class Context:
+    def __init__(self, lines, line_index):
+        self._lines = lines
+        self._line_index = line_index
+        self._previous_line = self.get_previous_line()
+        self._current_line = lines[line_index]
+        self._next_line = self.get_next_line()
+
+    def get_previous_line(self):
+        return self._lines[self._line_index - 1] if self._line_index > 0 else None
+
+    def get_next_line(self):
+        return (
+            self._lines[self._line_index + 1]
+            if self._line_index < len(self._lines) - 1
+            else None
+        )
+
+    @property
+    def line_index(self):
+        return self._line_index
+
+    @property
+    def previous_line(self):
+        return self._previous_line
+
+    @property
+    def current_line(self):
+        return self._current_line
+
+    @property
+    def next_line(self):
+        return self._next_line
