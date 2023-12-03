@@ -1,10 +1,12 @@
-COLORS = ['red', 'green', 'blue']
+COLORS = ["red", "green", "blue"]
 
 LINE = "Game 79: 7 red, 1 green; 1 blue, 6 red, 2 green; 1 blue, 12 red"
 
+
 def read_file(input):
-    with open(input, 'r') as f:
+    with open(input, "r") as f:
         return [line.strip() for line in f.readlines()]
+
 
 def init_colors_count():
     colors_count = {}
@@ -12,10 +14,11 @@ def init_colors_count():
         colors_count[color] = 0
     return colors_count
 
+
 def game_minimum_cubes(line) -> bool:
-    game_id = int(line.split(':')[0].split(' ')[1])
-    game_sets = [ single_set.strip() for single_set in line.split(':')[1].split(';') ]
-    
+    game_id = int(line.split(":")[0].split(" ")[1])
+    game_sets = [single_set.strip() for single_set in line.split(":")[1].split(";")]
+
     minimum_cubes = init_colors_count()
 
     for game_set in game_sets:
@@ -26,22 +29,25 @@ def game_minimum_cubes(line) -> bool:
 
     return game_id, minimum_cubes
 
+
 def game_set_minimum_cubes(single_set) -> tuple:
-    set_cubes = [ single_cube.strip() for single_cube in single_set.split(',') ]
+    set_cubes = [single_cube.strip() for single_cube in single_set.split(",")]
     minimum_cubes = init_colors_count()
 
     for set_cube in set_cubes:
-        cube_color = set_cube.split(' ')[1]
-        cube_quantity = int(set_cube.split(' ')[0])
+        cube_color = set_cube.split(" ")[1]
+        cube_quantity = int(set_cube.split(" ")[0])
         if cube_quantity > minimum_cubes[cube_color]:
             minimum_cubes[cube_color] = cube_quantity
     return minimum_cubes
+
 
 def compute_game_power(game_minimum_cubes) -> int:
     game_power = 1
     for color in COLORS:
         game_power *= game_minimum_cubes[color]
     return game_power
+
 
 def main():
     input = "input"
@@ -56,5 +62,6 @@ def main():
 
         games_power_sum += game_power
     print(f"Games power sum: {games_power_sum}")
+
 
 main()

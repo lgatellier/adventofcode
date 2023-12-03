@@ -1,7 +1,9 @@
 import regex as re
 
 # this regex matches digits, and also digits spelled in letter, like one, two, three, etc.
-REGEXP_DIGITS_SPELLED_IN_LETTERS = r"(\d|one|two|three|four|five|six|seven|eight|nine|ten)"
+REGEXP_DIGITS_SPELLED_IN_LETTERS = (
+    r"(\d|one|two|three|four|five|six|seven|eight|nine|ten)"
+)
 LETTERS_TO_DIGITS = {
     "one": 1,
     "two": 2,
@@ -12,14 +14,16 @@ LETTERS_TO_DIGITS = {
     "seven": 7,
     "eight": 8,
     "nine": 9,
-    "ten": 10
+    "ten": 10,
 }
+
 
 # write a function which reads file "input" line by line
 def read_file(input):
-    with open(input, 'r') as f:
+    with open(input, "r") as f:
         lines = f.readlines()
         return lines
+
 
 def get_line_calibration_value(line):
     for i in range(len(line)):
@@ -29,10 +33,12 @@ def get_line_calibration_value(line):
         last_digit = convert_letters_to_digit(matches[-1])
     return int(f"{first_digit}{last_digit}")
 
+
 def convert_letters_to_digit(letters):
     if letters.isnumeric():
         return int(letters)
     return LETTERS_TO_DIGITS[letters]
+
 
 # sum all calibration values for file named "input"
 def sum_calibration_values(input):
@@ -44,10 +50,13 @@ def sum_calibration_values(input):
         sum += calibration_value
     return sum
 
+
 # main function, which computes sum_calibration_values for file which named is passed in script argument
 def main():
     import sys
+
     input = sys.argv[1]
     print(sum_calibration_values(input))
+
 
 main()
