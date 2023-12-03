@@ -1,6 +1,6 @@
 import re
 
-from aoc23.day03 import part2
+from aoc.y23.day03 import part2
 
 
 def test_find_all_symbol():

@@ -1,7 +1,7 @@
 import re
 
-from aoc23 import utils
-from aoc23.day03 import (
+from aoc import utils
+from aoc.y23.day03 import (
     Context,
     filter_part_numbers,
     find_all_numbers,

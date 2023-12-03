@@ -1,6 +1,6 @@
 import re
 
-from aoc23.day03 import part1
+from aoc.y23.day03 import part1
 
 
 def test_find_numbers_middle():

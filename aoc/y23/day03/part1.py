@@ -1,5 +1,5 @@
-from aoc23.utils import read_file
-from aoc23.day03 import (
+from aoc.utils import read_file
+from aoc.y23.day03 import (
     filter_part_numbers,
     find_all_numbers,
     find_numbers,
