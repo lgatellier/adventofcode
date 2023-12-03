@@ -98,4 +98,4 @@ def test_is_part_number_shouldReturnFalse_whenAdjacentSymbolInNextLineBeforeNumb
 
 
 def test_main():
-    assert part1.main("tests/input_day03") == 527369
+    assert part1.main("tests/y23/input_day03") == 527369

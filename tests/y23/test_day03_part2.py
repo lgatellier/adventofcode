@@ -26,4 +26,4 @@ def test_is_adjacent():
 
 
 def test_main():
-    assert part2.main("tests/input_day03") == 73074886
+    assert part2.main("tests/y23/input_day03") == 73074886
