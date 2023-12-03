@@ -1,6 +1,7 @@
 import regex as re
 
-# this regex matches digits, and also digits spelled in letter, like one, two, three, etc.
+# this regex matches digits, and also digits spelled in letter,
+# like one, two, three, etc.
 REGEXP_DIGITS_SPELLED_IN_LETTERS = (
     r"(\d|one|two|three|four|five|six|seven|eight|nine|ten)"
 )
@@ -51,7 +52,8 @@ def sum_calibration_values(input):
     return sum
 
 
-# main function, which computes sum_calibration_values for file which named is passed in script argument
+# main function, which computes sum_calibration_values for file
+# which named is passed in script argument
 def main(input_file="input"):
     sum = sum_calibration_values(input_file)
     print(f"Sum of calibration values is {sum}")

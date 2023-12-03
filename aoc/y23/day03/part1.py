@@ -2,9 +2,6 @@ from aoc.utils import read_file
 from aoc.y23.day03 import (
     filter_part_numbers,
     find_all_numbers,
-    find_numbers,
-    has_symbol,
-    is_part_number,
 )
 
 

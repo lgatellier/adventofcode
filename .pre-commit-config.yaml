@@ -4,6 +4,10 @@ repos:
     hooks:
       - id: black
         args: [--safe, --quiet]
+  - repo: https://github.com/PyCQA/flake8
+    rev: 6.1.0
+    hooks:
+      - id: flake8
   - repo: local
     hooks:
       - id: pytest

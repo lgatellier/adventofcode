@@ -29,7 +29,8 @@ def sum_calibration_values(input):
     return sum
 
 
-# main function, which computes sum_calibration_values for file which named is passed in script argument
+# main function, which computes sum_calibration_values for file
+# which named is passed in script argument
 def main(input_file="input"):
     sum = sum_calibration_values(input_file)
     print(f"Sum of calibration values is {sum}")

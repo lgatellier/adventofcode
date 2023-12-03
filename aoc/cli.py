@@ -1,9 +1,7 @@
 from datetime import date
 import importlib
-import os
 from pathlib import Path
 import typer
-from typing import Optional
 
 from aoc import utils
 
@@ -26,7 +24,7 @@ def validate_year(year: int) -> bool:
     if year < 100:
         year += 2000
     if year < 2015:
-        raise typer.BadParameter(f"Advent Of Code did not exist before 2015")
+        raise typer.BadParameter("Advent Of Code did not exist before 2015")
     if year > today.year or year == today.year and today.month < 12:
         raise typer.BadParameter(f"Advent Of Code has not started yet for year {year}")
     return year
@@ -34,7 +32,7 @@ def validate_year(year: int) -> bool:
 
 def validate_day(day: int) -> bool:
     if not 1 <= day <= 25:
-        raise typer.BadParameter(f"Day must be between 1 and 25")
+        raise typer.BadParameter("Day must be between 1 and 25")
     return day
 
 
@@ -63,7 +61,7 @@ def run(
         module = importlib.import_module(module_name)
         typer.echo(f"Starting AdventOfCode {year} Day {day} Part {part}")
         module.main(input_file=input_file)
-    except ModuleNotFoundError as err:
+    except ModuleNotFoundError:
         typer.echo(
             f"ERROR : AdventOfCode {year} Day {day} Part {part} does not exist or is not implemented yet",
             err=True,
