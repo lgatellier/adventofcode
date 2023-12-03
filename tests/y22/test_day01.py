@@ -1,16 +1,17 @@
+from aoc.y22 import day01
 from aoc.y22.day01 import part1 as puzzle
 
 
 def test_parse_next_elf():
     lines = ["1", "2", "3", "4", "5", ""]
-    elf, pos = puzzle.parse_next_elf(lines, 0)
+    elf, pos = day01.parse_next_elf(lines, 0)
     assert elf.total == 15
     assert pos == 6
 
 
 def test_parse_elves():
     lines = ["1", "2", "3", "4", "5", "", "6", "7", "8", "9", ""]
-    elves = puzzle.parse_elves(lines)
+    elves = day01.parse_elves(lines)
     assert len(elves) == 2
     assert elves[0].total == 15
     assert elves[1].total == 30
