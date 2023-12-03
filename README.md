@@ -8,9 +8,9 @@ Advent Of Code is a *game*, so please **don't use this project without looking f
 ## Implemented exercises
 This CLI handles the following exercises :
 - Year 2023
-   - Day 1 (Part 1 & 2) : Solved, but not integrated in the CLI yet
-   - Day 2 (Part 1 & 2) : Solved, but not integrated in the CLI yet
-   - Day 3 (Part 1 & 2)
+   - Day 1 : Solved, but not integrated in the CLI yet
+   - Day 2 : Solved, but not integrated in the CLI yet
+   - Day 3
 
 ## Usage
 This project is **not published** to Pypi.org.
