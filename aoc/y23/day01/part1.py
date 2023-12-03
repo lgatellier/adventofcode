@@ -1,3 +1,6 @@
+from aoc import utils
+
+
 # write a function which reads file "input" line by line
 def read_file(input):
     with open(input, "r") as f:
@@ -38,6 +41,4 @@ def main(input_file="input"):
 
 
 if __name__ == "__main__":
-    import sys
-
-    main(sys.argv[1] if len(sys.argv) > 1 else None)
+    utils.main(main)
