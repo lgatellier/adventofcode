@@ -1,25 +1,25 @@
 class Round:
     SCORES = {
-        "X": {
-            "A": 4,  # 1 for rock plus 3 for draw
-            "B": 1,  # 1 for rock plus 0 for loss
-            "C": 7,  # 1 for rock plus 6 for win
+        "A": {  # rock
+            "X": 4,  # rock +1, +3 for draw
+            "Y": 8,  # paper +2, +6 for win
+            "Z": 3,  # scissors +3, + 0 for loss
         },
-        "Y": {
-            "A": 8,  # 2 for paper plus 6 for win
-            "B": 5,  # 2 for paper plus 3 for draw
-            "C": 2,  # 2 for paper plus 0 for loss
+        "B": {  # paper
+            "X": 1,  # rock +1, +0 for loss
+            "Y": 5,  # paper +2, +3 for draw
+            "Z": 9,  # scissors +3, +6 for win
         },
-        "Z": {
-            "A": 3,  # 3 for scissors plus 0 for loss
-            "B": 9,  # 3 for scissors plus 6 for win
-            "C": 6,  # 3 for scissors plus 3 for draw
+        "C": {  # scissors
+            "X": 7,  # rock +1, +6 for win
+            "Y": 2,  # paper +2, +0 for loss
+            "Z": 6,  # scissors +3, +3 for draw
         },
     }
 
-    def __init__(self, opponent_choice, self_choice):
+    def __init__(self, opponent_choice):
         self._opponent_choice = opponent_choice
-        self._self_choice = self_choice
+        self._self_choice = None
 
     @property
     def opponent_choice(self):
@@ -30,8 +30,8 @@ class Round:
         return self._self_choice
 
     def score(self):
-        return self.SCORES[self._self_choice][self._opponent_choice]
+        return self.SCORES[self._opponent_choice][self._self_choice]
 
 
-def parse_rounds(lines):
-    return [Round(*line.strip().split()) for line in lines]
+def parse_rounds(lines, cls):
+    return [cls(*line.strip().split()) for line in lines]
