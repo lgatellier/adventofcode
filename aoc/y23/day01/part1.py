@@ -30,11 +30,13 @@ def sum_calibration_values(input):
 
 
 # main function, which computes sum_calibration_values for file which named is passed in script argument
-def main():
+def main(input_file="input"):
+    sum = sum_calibration_values(input_file)
+    print(f"Sum of calibration values is {sum}")
+    return sum
+
+
+if __name__ == "__main__":
     import sys
 
-    input = sys.argv[1]
-    print(sum_calibration_values(input))
-
-
-main()
+    main(sys.argv[1] if len(sys.argv) > 1 else None)
