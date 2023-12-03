@@ -11,3 +11,13 @@ This CLI handles the following exercises :
    - Day 1 (Part 1 & 2) : Solved, but not integrated in the CLI yet
    - Day 2 (Part 1 & 2) : Solved, but not integrated in the CLI yet
    - Day 3 (Part 1 & 2)
+
+## Usage
+This project is **not published** to Pypi.org.
+
+To run the CLI :
+1. Install some recent python version
+1. Clone the repository on your computer
+1. Install poetry : `pip3 install poetry`
+1. Install the CLI from source code : `poetry install`
+1. Type `aoc --help`, and enjoy !
