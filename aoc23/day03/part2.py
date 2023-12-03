@@ -44,13 +44,15 @@ def main(input="input"):
         line_gears = [is_gear_symbol(ctx, match) for match in symbols[i]]
         gear_ratios.insert(i, [ratio for is_gear, ratio in line_gears if is_gear])
 
-    print(gear_ratios)
     sum_gear_ratios = sum([sum(ratios) for ratios in gear_ratios])
     return sum_gear_ratios
 
 
 if __name__ == "__main__":
     import sys
+    import time
 
+    start1 = time.time()
     sum_gear_ratios = main(sys.argv[1] if len(sys.argv) > 1 else None)
-    print(f"sum is {sum_gear_ratios}")
+    end1 = time.time()
+    print(f"sum is {sum_gear_ratios} ({end1 - start1} seconds) ")
