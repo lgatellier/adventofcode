@@ -50,48 +50,55 @@ def test_has_symbol():
 
 
 def test_is_part_number_shouldReturnFalse_whenNoSymbolInAnyLine():
-    line = "....456.....123...."
-    previous_line = "......."
-    next_line = "......."
-    match = re.search(r"\d+", line)
-    assert not puzzle.is_part_number(line, previous_line, next_line, match)
+    lines = [".......", "....456.....123....", "......."]
+    ctx = puzzle.Context(lines, 1)
+    match = re.search(r"\d+", lines[1])
+    assert not puzzle.is_part_number(ctx, match)
 
 
 def test_is_part_number_shouldReturnTrue_whenAdjacentSymbolInSameLineAfterNumber():
-    line = "....456$.....123...."
-    match = re.search(r"\d+", line)
-    assert puzzle.is_part_number(line, None, None, match)
+    lines = ["....456$.....123...."]
+    ctx = puzzle.Context(lines, 0)
+    match = re.search(r"\d+", lines[0])
+    assert puzzle.is_part_number(ctx, match)
 
 
 def test_is_part_number_shouldReturnTrue_whenAdjacentSymbolInSameLineBeforeNumber():
-    line = "....*456.....123...."
-    match = re.search(r"\d+", line)
-    assert puzzle.is_part_number(line, None, None, match)
+    lines = ["....*456.....123...."]
+    ctx = puzzle.Context(lines, 0)
+    match = re.search(r"\d+", lines[0])
+    assert puzzle.is_part_number(ctx, match)
 
 
 def test_is_part_number_shouldReturnTrue_whenAdjacentSymbolInPreviousLineBeforeNumber():
-    line = "....456.....123...."
-    previous_line = "....*"
-    match = re.search(r"\d+", line)
-    assert puzzle.is_part_number(line, previous_line, None, match)
+    lines = [
+        "....*",  # previous line
+        "....456.....123....",  # current line
+    ]
+    ctx = puzzle.Context(lines, 1)
+    match = re.search(r"\d+", lines[1])
+    assert puzzle.is_part_number(ctx, match)
 
 
 def test_is_part_number_shouldReturnTrue_whenAdjacentSymbolInNextLineAfterNumber():
-    line = "....456.....123...."
-    next_line = ".......*"
-    match = re.search(r"\d+", line)
-    assert puzzle.is_part_number(line, None, next_line, match)
+    lines = ["....456.....123....", ".......*"]  # current line  # next line
+    ctx = puzzle.Context(lines, 0)
+    match = re.search(r"\d+", lines[0])
+    assert puzzle.is_part_number(ctx, match)
 
 
 def test_is_part_number_shouldReturnFalse_whenAdjacentSymbolInPreviousLineAfterNumber():
-    line = "....456.....123...."
-    previous_line = ".......*"
-    match = re.search(r"\d+", line)
-    assert puzzle.is_part_number(line, previous_line, None, match)
+    lines = [".......*", "....456.....123...."]  # previous line  # current line
+    ctx = puzzle.Context(lines, 1)
+    match = re.search(r"\d+", lines[1])
+    assert puzzle.is_part_number(ctx, match)
 
 
 def test_is_part_number_shouldReturnFalse_whenAdjacentSymbolInNextLineBeforeNumber():
-    line = "....456.....123...."
-    next_line = "...*"
-    match = re.search(r"\d+", line)
-    assert puzzle.is_part_number(line, None, next_line, match)
+    lines = [
+        "....456.....123....",  # current line
+        "...*",  # next line
+    ]
+    ctx = puzzle.Context(lines, 0)
+    match = re.search(r"\d+", lines[0])
+    assert puzzle.is_part_number(ctx, match)
