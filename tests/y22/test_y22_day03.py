@@ -1,6 +1,9 @@
 from aoc.y22.day03 import Rucksack, part1, part2
 
 
+from test_utils import run_main
+
+
 def test_rucksack1():
     line = "vJrwpWtwJgWrhcsFMMfFFhFp"
     rucksack = Rucksack(line)
@@ -11,8 +14,8 @@ def test_rucksack1():
 
 
 def test_common_chars():
-    assert part1.main("tests/y22/input_day03") == 7811
+    assert run_main(part1.main, "tests/y22/input_day03") == 7811
 
 
 def test_part2_main():
-    assert part2.main("tests/y22/input_day03") == 2639
+    assert run_main(part2.main, "tests/y22/input_day03") == 2639

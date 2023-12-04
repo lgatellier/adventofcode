@@ -60,9 +60,11 @@ def run(
 
     try:
         module = importlib.import_module(module_name)
+        typer.echo(f"Loading lines from input file {input_file}")
+        input_lines = utils.read_file(input_file)
         typer.echo(f"Starting AdventOfCode {year} Day {day} Part {part}")
         start_time_ns = time.time_ns()
-        module.main(input_file=input_file)
+        module.main(input_lines)
         end_time_ns = time.time_ns()
         typer.echo(f"Execution time : {(end_time_ns - start_time_ns) / 1000000} ms")
     except ModuleNotFoundError:

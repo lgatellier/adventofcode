@@ -2,9 +2,7 @@ from aoc import utils
 from aoc.y22.day01 import parse_elves, sorted_elves_by_calories
 
 
-def main(input_file="input"):
-    lines = utils.read_file(input_file)
-
+def main(lines: list[str]):
     elves = parse_elves(lines)
     sorted_elves = sorted_elves_by_calories(elves)
 

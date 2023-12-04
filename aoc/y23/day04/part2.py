@@ -12,8 +12,8 @@ def win_additional_cards(cards: list[Card], index: int):
                 utils.verbose(f"You win {card.count} cards number {index + i + 1}")
 
 
-def main(input_file: str):
-    cards = parse_cards(utils.read_file(input_file))
+def main(lines: list[str]):
+    cards = parse_cards(lines)
     total_cards = 0
     for i in range(len(cards)):
         win_additional_cards(cards, i)

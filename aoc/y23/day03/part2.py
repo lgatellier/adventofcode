@@ -1,6 +1,5 @@
 import re
 
-from aoc import utils
 from aoc.y23.day03 import (
     Context,
     filter_part_numbers,
@@ -33,8 +32,7 @@ def is_gear_symbol(ctx: Context, symbol_match) -> bool:
     return False, None
 
 
-def main(input_file="input"):
-    lines = utils.read_file(input_file)
+def main(lines: list[str]):
     part_numbers = filter_part_numbers(lines, find_all_numbers(lines))
     symbols = [find_all_symbol(line) for line in lines]
 

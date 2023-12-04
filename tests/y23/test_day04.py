@@ -1,6 +1,9 @@
 from aoc.y23.day04 import parse_cards, part1, part2
 
 
+from test_utils import run_main
+
+
 def test_parse_cards_card1():
     line = "Card  1: 1 2 3 4 5 | 6 7 8 9 10"
     cards = parse_cards([line])
@@ -121,8 +124,8 @@ def test_card_points():
 
 
 def test_part1_main():
-    assert part1.main("tests/y23/input_day04") == 21558
+    assert run_main(part1.main, "tests/y23/input_day04") == 21558
 
 
 def test_part2_main():
-    assert part2.main("tests/y23/input_day04_partial") == 15
+    assert run_main(part2.main, "tests/y23/input_day04_partial") == 15

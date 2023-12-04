@@ -21,8 +21,7 @@ class Group:
             utils.verbose("Group's badge is '{badge}'", badge=self.badge)
 
 
-def main(input_file="input"):
-    lines = utils.read_file(input_file)
+def main(lines: list[str]):
     groups: list[Group] = []
     current_group: Group = None
     rucksacks = parse_rucksacks(lines)

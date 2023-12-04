@@ -26,8 +26,7 @@ def is_set_possible(set) -> bool:
     return True
 
 
-def main(input_file="input"):
-    lines = utils.read_file(input_file)
+def main(lines: list[str]):
     possible_games = []
     for line in lines:
         game_id, possible = is_game_possible(line)
@@ -38,7 +37,3 @@ def main(input_file="input"):
     possible_games_sum = sum(possible_games)
     print(f"Sum of possible games is {possible_games_sum}")
     return possible_games_sum
-
-
-if __name__ == "__main__":
-    utils.main(main)

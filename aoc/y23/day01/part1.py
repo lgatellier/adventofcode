@@ -1,13 +1,3 @@
-from aoc import utils
-
-
-# write a function which reads file "input" line by line
-def read_file(input):
-    with open(input, "r") as f:
-        lines = f.readlines()
-        return lines
-
-
 def get_line_calibration_value(line):
     # process all line characters one by one
     first_digit = None
@@ -22,8 +12,7 @@ def get_line_calibration_value(line):
 
 
 # sum all calibration values for file named "input"
-def sum_calibration_values(input):
-    lines = read_file(input)
+def sum_calibration_values(lines: list[str]):
     sum = 0
     for line in lines:
         calibration_value = get_line_calibration_value(line)
@@ -34,11 +23,7 @@ def sum_calibration_values(input):
 
 # main function, which computes sum_calibration_values for file
 # which named is passed in script argument
-def main(input_file="input"):
-    sum = sum_calibration_values(input_file)
+def main(lines: list[str]):
+    sum = sum_calibration_values(lines)
     print(f"Sum of calibration values is {sum}")
     return sum
-
-
-if __name__ == "__main__":
-    utils.main(main)
