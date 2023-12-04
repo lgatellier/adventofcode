@@ -1,24 +1,21 @@
-import copy
-
 from aoc import utils
-from aoc.y23.day04 import Card, parse_cards_grouped_by_number
+from aoc.y23.day04 import Card, parse_cards
 
 
-def win_additional_cards(card: Card, cards: dict[int, list[Card]]):
+def win_additional_cards(cards: list[Card], index: int):
+    card = cards[index]
     print(f"process card {card.card_number}")
     if len(card.my_winning_numbers) > 0:
         for i in range(1, len(card.my_winning_numbers) + 1):
-            if card.card_number + i in cards.keys():
-                cards[card.card_number + i].append(
-                    copy.copy(cards[card.card_number + i][0])
-                )
+            if index + i < len(cards):
+                cards[index + i].increment_count(card.count)
 
 
 def main(input_file: str):
-    cards = parse_cards_grouped_by_number(utils.read_file(input_file))
-    for card_number in sorted(cards.keys()):
-        for card in cards[card_number]:
-            win_additional_cards(card, cards)
-    total_cards = sum([len(cards[card_number]) for card_number in cards.keys()])
+    cards = parse_cards(utils.read_file(input_file))
+    total_cards = 0
+    for i in range(len(cards)):
+        win_additional_cards(cards, i)
+        total_cards += cards[i].count
     print(f"You end with {total_cards} cards")
     return total_cards

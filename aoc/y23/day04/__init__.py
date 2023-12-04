@@ -5,10 +5,11 @@ class Card:
         self.card_number = card_number
         self.winning_numbers = winning_numbers
         self.my_numbers = my_numbers
+        self.my_winning_numbers = list(set(self.winning_numbers) & set(self.my_numbers))
+        self.count = 1
 
-    @property
-    def my_winning_numbers(self) -> list[int]:
-        return list(set(self.winning_numbers) & set(self.my_numbers))
+    def increment_count(self, increment: int):
+        self.count += increment
 
 
 def parse_cards(lines: list[str]) -> list[Card]:
@@ -22,11 +23,3 @@ def parse_card(line: str) -> Card:
     winning_numbers = [int(n.strip()) for n in numbers[0].split(" ") if n != ""]
     my_numbers = [int(n.strip()) for n in numbers[1].split(" ") if n.strip() != ""]
     return Card(card_number, winning_numbers, my_numbers)
-
-
-def parse_cards_grouped_by_number(lines: list[str]) -> dict[int, list[Card]]:
-    cards = {}
-    for line in lines:
-        card = parse_card(line)
-        cards[card.card_number] = [card]
-    return cards
