@@ -1,9 +1,6 @@
 from aoc import utils
 from aoc.y22.day03 import get_priority, parse_rucksacks, Rucksack
 
-LOWER_SUB = -96
-UPPER_SUB = -38
-
 
 class Group:
     def __init__(self):
