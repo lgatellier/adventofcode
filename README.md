@@ -11,6 +11,7 @@ This CLI handles the following exercises :
    - Day 1
    - Day 2
    - Day 3
+   - Day 4
 - Year 2023
    - Day 1
    - Day 2

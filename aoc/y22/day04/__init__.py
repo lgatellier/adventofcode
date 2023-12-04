@@ -8,6 +8,11 @@ class PairOfElves:
         self.fully_overlap = (first[0] <= second[0] and first[1] >= second[1]) or (
             second[0] <= first[0] and second[1] >= first[1]
         )
+        self.partially_overlap = (
+            self.fully_overlap
+            or is_included(first[0], second[0], second[1])
+            or is_included(first[1], second[0], second[1])
+        )
 
     @staticmethod
     def parse(line: str) -> PairOfElves:
@@ -18,3 +23,7 @@ class PairOfElves:
             (int(first_elf[0]), int(first_elf[1])),
             (int(second_elf[0]), int(second_elf[1])),
         )
+
+
+def is_included(i: int, start: int, end: int) -> bool:
+    return start <= i <= end
