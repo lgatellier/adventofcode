@@ -61,10 +61,10 @@ def run(
     try:
         module = importlib.import_module(module_name)
         typer.echo(f"Starting AdventOfCode {year} Day {day} Part {part}")
-        start_time = time.time()
+        start_time_ns = time.time_ns()
         module.main(input_file=input_file)
-        end_time = time.time()
-        typer.echo(f"Execution time : {end_time - start_time} seconds")
+        end_time_ns = time.time_ns()
+        typer.echo(f"Execution time : {(end_time_ns - start_time_ns) / 1000000} ms")
     except ModuleNotFoundError:
         typer.echo(
             f"ERROR : AdventOfCode {year} Day {day} Part {part} does not exist or is not implemented yet",

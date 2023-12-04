@@ -4,11 +4,12 @@ from aoc.y23.day04 import Card, parse_cards
 
 def win_additional_cards(cards: list[Card], index: int):
     card = cards[index]
-    print(f"process card {card.card_number}")
+    utils.verbose(f"process card number {card.card_number}")
     if len(card.my_winning_numbers) > 0:
         for i in range(1, len(card.my_winning_numbers) + 1):
             if index + i < len(cards):
                 cards[index + i].increment_count(card.count)
+                utils.verbose(f"You win {card.count} cards number {index + i + 1}")
 
 
 def main(input_file: str):
