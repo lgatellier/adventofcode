@@ -1,7 +1,5 @@
 import regex as re
 
-from aoc import utils
-
 # this regex matches digits, and also digits spelled in letter,
 # like one, two, three, etc.
 REGEXP_DIGITS_SPELLED_IN_LETTERS = (
@@ -52,7 +50,3 @@ def main(lines: list[str]):
     sum = sum_calibration_values(lines)
     print(f"Sum of calibration values is {sum}")
     return sum
-
-
-if __name__ == "__main__":
-    utils.main(main)

@@ -44,13 +44,3 @@ def main(lines: list[str]):
 
     sum_gear_ratios = sum([sum(ratios) for ratios in gear_ratios])
     return sum_gear_ratios
-
-
-if __name__ == "__main__":
-    import sys
-    import time
-
-    start1 = time.time()
-    sum_gear_ratios = main(sys.argv[1] if len(sys.argv) > 1 else None)
-    end1 = time.time()
-    print(f"sum is {sum_gear_ratios} ({end1 - start1} seconds) ")
