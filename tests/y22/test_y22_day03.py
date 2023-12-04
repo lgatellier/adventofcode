@@ -6,6 +6,8 @@ def test_rucksack1():
     rucksack = Rucksack(line)
     assert rucksack.first_compartment == "vJrwpWtwJgWr"
     assert rucksack.second_compartment == "hcsFMMfFFhFp"
+    for c in line:
+        assert c in rucksack.unique_items
 
 
 def test_common_chars():

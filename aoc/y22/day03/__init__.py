@@ -3,6 +3,7 @@ class Rucksack:
         middle = len(line) // 2
         self.first_compartment = line[0:middle]
         self.second_compartment = line[middle : len(line)]
+        self.unique_items: set[str] = set(line)
 
     @property
     def common_char(self) -> str:
@@ -17,3 +18,18 @@ class Rucksack:
 
 def parse_rucksacks(lines: list[str]) -> list[Rucksack]:
     return [Rucksack(line) for line in lines]
+
+
+# a=97 in ASCII but 1 in this puzzle
+LOWER_SUB = 96
+# A=65 in ASCII but 27 in this puzzle
+UPPER_SUB = 38
+
+
+def get_priority(char: str):
+    if len(char) != 1:
+        raise ValueError("get_priority takes a single char as argument")
+    elif char.isupper():
+        return ord(char) - UPPER_SUB
+    else:
+        return ord(char) - LOWER_SUB
