@@ -1,43 +1,56 @@
-from collections import OrderedDict
+from __future__ import annotations
 
 from aoc import utils
+
+
+class Mapping:
+    def __init__(self, dest_start: int, src_start: int, range_length: int):
+        self.__src_start = src_start
+        self.__src_end = src_start + range_length - 1
+        self.__dest_start = dest_start
+        self.__dest_end = dest_start + range_length - 1
+        self.__range_length = range_length
+
+    def matches(self, value: int):
+        return self.__src_start <= value <= self.__src_end
+
+    def map(self, value: int):
+        return self.__dest_start + value - self.__src_start
+
+    @property
+    def src_start(self):
+        return self.__src_start
+
+    def __repr__(self) -> str:
+        return f"Mapping[src_start={self.src_start}, src_end={self.__src_end}, dest_start={self.__dest_start}]"
+
+    @staticmethod
+    def parse(line: str) -> Mapping:
+        split = line.split(" ")
+        return Mapping(int(split[0]), int(split[1]), int(split[2]))
 
 
 class Context:
     def __init__(self, seeds: list[int] = None, seed_ranges: list[tuple[int]] = None):
         self.seeds = seeds
         self.seed_ranges = seed_ranges
-        self.__maps = {
-            "seed": {},
-            "soil": {},
-            "fertilizer": {},
-            "water": {},
-            "light": {},
-            "temperature": {},
-            "humidity": {},
+        self.__maps: dict[str, list[Mapping]] = {
+            "seed": [],
+            "soil": [],
+            "fertilizer": [],
+            "water": [],
+            "light": [],
+            "temperature": [],
+            "humidity": [],
         }
 
-    def add_mapping(
-        self, map: str, dest_start: int, src_start: int, range_length: int
-    ) -> None:
+    def add_mapping(self, map: str, mapping: Mapping) -> None:
         if map not in self.__maps:
             raise ValueError(f"Non existing map {map}")
-        utils.verbose(
-            "Adding mapping {map}, dest={dest}, src={src}, length={length}",
-            map=map,
-            dest=dest_start,
-            src=src_start,
-            length=range_length,
+        utils.verbose("Adding {map} mapping : {mapping}", map=map, mapping=mapping)
+        self.__maps[map] = sorted(
+            self.__maps[map] + [mapping], key=lambda m: m.src_start
         )
-        self.__maps[map][src_start] = {
-            "src_start": src_start,
-            "dest_start": dest_start,
-            "length": range_length,
-        }
-
-    def sort_mappings(self):
-        for map in self.__maps.keys():
-            self.__maps[map] = OrderedDict(sorted(self.__maps[map].items()))
 
     def map_value(self, map: str, searched_value: int) -> int:
         utils.verbose("Looking for mapping of type {type}", type=map)
@@ -45,17 +58,7 @@ class Context:
             raise ValueError(f"Non existing map {map}")
         mapping = self.__find_least_or_equal_mapping(map, searched_value)
         utils.verbose("Potentially matching mapping : {mapping}", mapping=mapping)
-        print(mapping)
-        print(searched_value)
-        if (
-            mapping
-            and mapping["src_start"]
-            <= searched_value
-            <= mapping["src_start"] + mapping["length"]
-        ):
-            dest_value = mapping["dest_start"] + (searched_value - mapping["src_start"])
-        else:
-            dest_value = searched_value
+        dest_value = mapping.map(searched_value) if mapping else searched_value
         utils.verbose(
             "Mapping : {map} : {src_value} => {dest_value}",
             map=map,
@@ -64,19 +67,17 @@ class Context:
         )
         return dest_value
 
-    def __find_least_or_equal_mapping(self, map: str, searched_value: int) -> dict:
+    def __find_least_or_equal_mapping(self, map: str, searched_value: int) -> Mapping:
         utils.verbose(
             "Looking for mapping of type {map} corresponding to value {value}",
             map=map,
             value=searched_value,
         )
         last_value = None
-        for key, value in self.__maps[map].items():
-            if key <= searched_value:
-                utils.verbose(
-                    "Found mapping for key={key} : {value}", key=key, value=value
-                )
-                last_value = value
+        for mapping in self.__maps[map]:
+            if mapping.matches(searched_value):
+                last_value = mapping
+                utils.verbose("Found matching mapping {mapping}", mapping=mapping)
         return last_value
 
 
@@ -101,9 +102,6 @@ def parse_context(lines: list[str], ranges: bool = False) -> Context:
         elif line[-4:] == "map:":
             current_mapping = line.split("-")[0]
         else:
-            split = line.split(" ")
-            ctx.add_mapping(
-                current_mapping, int(split[0]), int(split[1]), int(split[2])
-            )
-    ctx.sort_mappings()
+            mapping = Mapping.parse(line)
+            ctx.add_mapping(current_mapping, mapping)
     return ctx
