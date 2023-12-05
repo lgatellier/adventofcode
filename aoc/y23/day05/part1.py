@@ -27,7 +27,7 @@ def main(lines: list[str]):
         key = keys[i]
         next_key = keys[i + 1]
         for value in mapped_data[key]:
-            mapped_data[next_key].append(ctx.get_mapping(key, value))
+            mapped_data[next_key].append(ctx.map_value(key, value))
     print(
         f"Lower location value based on initial seed values is {min(mapped_data['location'])}"
     )

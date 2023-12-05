@@ -38,7 +38,7 @@ class Context:
         for map in self.__maps.keys():
             self.__maps[map] = OrderedDict(sorted(self.__maps[map].items()))
 
-    def get_mapping(self, map: str, searched_value: int) -> int:
+    def map_value(self, map: str, searched_value: int) -> int:
         utils.verbose("Looking for mapping of type {type}", type=map)
         if map not in self.__maps:
             raise ValueError(f"Non existing map {map}")

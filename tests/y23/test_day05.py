@@ -18,9 +18,9 @@ def test_parse_context():
     assert 28965817 in ctx.seeds
     assert 302170009 in ctx.seeds
     assert 1752849261 in ctx.seeds
-    assert ctx.get_mapping("seed", 1) == 1
-    assert ctx.get_mapping("seed", 1920754815) == 3680121696
-    assert ctx.get_mapping("seed", 1920754915) == 3680121796
+    assert ctx.map_value("seed", 1) == 1
+    assert ctx.map_value("seed", 1920754815) == 3680121696
+    assert ctx.map_value("seed", 1920754915) == 3680121796
 
 
 def test_main():
