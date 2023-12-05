@@ -23,6 +23,21 @@ def test_parse_context():
     assert ctx.map_value("seed", 1920754915) == 3680121796
 
 
+def test_parse_context_ranges():
+    utils.state["verbose"] = True
+    lines = [
+        "seeds: 28965817 302170009 1752849261 48290258",
+        "",
+        "seed-to-soil map:",
+        "3680121696 1920754815 614845600",
+    ]
+    ctx = parse_context(lines, ranges=True)
+    assert ctx.seeds is None
+    assert len(ctx.seed_ranges) == 2
+    assert (28965817, 302170009) in ctx.seed_ranges
+    assert (1752849261, 48290258) in ctx.seed_ranges
+
+
 def test_main():
     utils.state["verbose"] = True
     result = run_main(part1.main, "tests/y23/input_day05")

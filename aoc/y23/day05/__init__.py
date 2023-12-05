@@ -4,8 +4,9 @@ from aoc import utils
 
 
 class Context:
-    def __init__(self, seeds: list[int]):
+    def __init__(self, seeds: list[int] = None, seed_ranges: list[tuple[int]] = None):
         self.seeds = seeds
+        self.seed_ranges = seed_ranges
         self.__maps = {
             "seed": {},
             "soil": {},
@@ -79,8 +80,19 @@ class Context:
         return last_value
 
 
-def parse_context(lines: list[str]) -> Context:
-    ctx = Context([int(seed) for seed in lines[0].split(" ")[1:]])
+def parse_context(lines: list[str], ranges: bool = False) -> Context:
+    seed_values = [int(seed) for seed in lines[0].split(" ")[1:]]
+    if ranges:
+        seed_ranges = sorted(
+            [
+                (seed_values[i], seed_values[i + 1])
+                for i in range(0, len(seed_values), 2)
+            ],
+            key=lambda r: r[0],
+        )
+        ctx = Context(seed_ranges=seed_ranges)
+    else:
+        ctx = Context(seeds=seed_values)
 
     current_mapping: str = None
     for line in lines[1:]:
